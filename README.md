@@ -14,7 +14,7 @@ runs of the container.
 
 * Stop the service:
 
-      ./pg stop
+      ./pg down
 
 * Start a `psql` session in a running service:
 
