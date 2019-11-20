@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+main() {
+  local mode="${@-up}"
+
+  case "${mode}" in
+    "up")
+      docker-compose -p postgres -f postgres.yml up --detach
+      ;;
+
+    "down")
+      docker-compose -p postgres -f postgres.yml down
+      ;;
+
+    "sql")
+      docker run -it --network postgres_default postgres psql -h db -U postgres
+      ;;
+  esac
+}
+
+main "$@"
