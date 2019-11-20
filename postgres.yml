@@ -8,20 +8,23 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      PGDATA: /var/lib/postgresql/data/pgdata
+      PGDATA: /var/lib/postgresql/data/postgres
     volumes:
-      - ./persistence/postgresql:/var/lib/postgresql/data/pgdata
+      - ./persistence:/var/lib/postgresql/data
     ports:
       - 5432:5432
 
   pgadmin:
     image: dpage/pgadmin4
     restart: always
+    depends_on:
+    - db
     environment:
       PGADMIN_DEFAULT_EMAIL: pg@example.com
       PGADMIN_DEFAULT_PASSWORD: postgres
       PGADMIN_LISTEN_PORT: 8080
     volumes:
       - ./persistence/pgadmin:/var/lib/pgadmin
+      - ./servers.json:/pgadmin4/servers.json
     ports:
       - 8080:8080
