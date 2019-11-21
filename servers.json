@@ -1,7 +1,7 @@
 {
     "Servers": {
         "1": {
-            "Name": "Docker",
+            "Name": "Quick-and-Dirty",
             "Group": "Servers",
             "Host": "db",
             "Port": 5432,

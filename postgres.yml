@@ -18,10 +18,11 @@ services:
     image: dpage/pgadmin4
     restart: always
     depends_on:
-    - db
+      - db
     environment:
       PGADMIN_CONFIG_SERVER_MODE: "False"
-      PGADMIN_DEFAULT_EMAIL: pg@example.com
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: postgres
       PGADMIN_LISTEN_PORT: 8080
     volumes:
