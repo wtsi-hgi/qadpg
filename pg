@@ -1,19 +1,35 @@
 #!/usr/bin/env bash
 
 main() {
-  local mode="${@-up}"
+  local mode="${@-start}"
 
   case "${mode}" in
-    "up")
+    "start")
+      # FIXME Don't hardcode all this
       docker-compose -p postgres -f postgres.yml up --detach
       ;;
 
-    "down")
+    "stop")
+      # FIXME Don't hardcode all this
       docker-compose -p postgres -f postgres.yml down
       ;;
 
     "sql")
-      docker run -it --network postgres_default postgres psql -h db -U postgres
+      # FIXME Don't hardcode all this
+      docker exec -it postgres_db_1 psql -h db -U postgres
+      ;;
+
+    *)
+      cat <<-EOF
+			Usage: pg [start|stop|sql]
+			
+			  start  Start the PostgreSQL and pgAdmin service
+			  stop   Stop the running service
+			  sql    Start a psql session in the running service
+			
+			EOF
+
+      exit 1
       ;;
   esac
 }
